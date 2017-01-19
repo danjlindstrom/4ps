@@ -1,0 +1,23 @@
+git init
+
+git add *.txt
+to local stage
+
+git commit
+to local repo
+
+git remote add origin https://github.com/itero4ps/4psse_900_001_dev
+https://github.com/try-git/try_git.git
+connect to remote depo
+
+git push -u origin master
+local -> remote
+Branch master set up to track remote branch master from origin.
+
+git pull origin master
+remote -> local
+
+git add *.txt
+to local stage
+
+git checkout -- octocat.txt
