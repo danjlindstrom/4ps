@@ -1,8 +1,44 @@
-﻿$PowerShellPath = 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\'
+﻿
+
+
+$MyObjectFilter = 'ID=..49999|81600..81800|100000..'
+#$MyObjectFilter = 'Type=table' #'ID=..49999|100000..'
+#$MyObjectFilter = 'Type=cod' #'ID=..49999|100000..'
+#$MyObjectFilter = 'version list=*SE*|*NO*'
+#$MyObjectFilter = 'version list=*NAV*'
+#$MyObjectFilter = 'version list=*PE*'
+#$MyObjectFilter = $MyObjectFilter + ';Date=24..'
+#$MyObjectFilter = 'Type=rep' #'ID=..49999|100000..'
+$MyWorkBaseFolder = 'c:\source\NAVWorkFolder' 
+
+
+$DatabaseInstance = ''
+
+$DatabaseServer = 'danlin01t550'
+$DatabaseName   = 'Demo Database NAV SE (09-0-7)'
+
+
+
+
+$MyWorkFolder   = (Join-Path $MyWorkBaseFolder $DatabaseServer$DatabaseInstance-$DatabaseName)
+
+if (!($DatabaseInstance -eq '')) { $DatabaseServer = (Join-Path $DatabaseServer $DatabaseInstance) }
+
+
+
+
+
+
+
+
+
+
+
+
+
+$PowerShellPath = 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\'
 $NavClientFolder = 'C:\Program Files (x86)\Microsoft Dynamics NAV\90\RoleTailored Client'
 $NavIde = (Join-Path $NavClientFolder '\finsql.exe')
-
-
 
 #C:\WINDOWS\system32\WindowsPowerShell\v1.0\PowerShell.exe  -NoExit -ExecutionPolicy RemoteSigned " & ' C:\Program Files (x86)\Microsoft Dynamics NAV\90\RoleTailored Client\NavModelTools.ps1 ' "
 #C:\WINDOWS\system32\WindowsPowerShell\v1.0\PowerShell.exe  -NoExit -ExecutionPolicy RemoteSigned " & ' C:\Program Files\Microsoft Dynamics NAV\90\Service\NavAdminTool.ps1 ' "

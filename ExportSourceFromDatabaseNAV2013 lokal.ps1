@@ -1,3 +1,52 @@
+$MyObjectFilter = 'ID=..49999|100000..'
+#$MyObjectFilter = $MyObjectFilter +'|60500..60510'  #rekab old
+$MyObjectFilter = $MyObjectFilter +'|81600..81800'  #assemblin
+#$MyObjectFilter = $MyObjectFilter +'|82400..82499'  #radiator
+#$MyObjectFilter = $MyObjectFilter +'|83000..83099'  #trs
+$MyObjectFilter = $MyObjectFilter +'|83200..83299'  #rekab
+#$MyObjectFilter = $MyObjectFilter +'|89100..89199'  #dynniq
+$MyObjectFilter = $MyObjectFilter +'|87100..87199|86200..86269'  #strukton
+#$MyObjectFilter = $MyObjectFilter + ';Date=''''|0501..'
+$fromDate = Get-Date ((Get-Date).AddDays(-7))  -Format FileDate
+#$MyObjectFilter = $MyObjectFilter + ';Date=''''|'+$fromdate+'..'
+
+#$MyObjectFilter = 'Locked=1' 
+
+#$MyObjectFilter = 'Type=table' #'ID=..49999|100000..'
+#$MyObjectFilter = 'Type=cod' #'ID=..49999|100000..'
+#$MyObjectFilter = 'version list=*SE*|*NO*'
+#$MyObjectFilter = 'version list=*NAV*'
+#$MyObjectFilter = 'version list=*PE*'
+$MyWorkBaseFolder = 'c:\source\NAVWorkFolder' 
+
+$DatabaseInstance = 'SQL2016'
+$DatabaseServer = 'danlin01t550'
+$DatabaseName   = 'Strukton_4PS_NAV_prod'
+
+#$DatabaseInstance = 'SQL2012'
+#$DatabaseName   = 'nav2017prodnordics'
+
+if ($false) {
+$DatabaseInstance = ''
+$DatabaseServer = 'sql04'
+#$DatabaseName   = '4PSW1_710_110_14'
+$DatabaseName   = '4psse_71_110_dev'
+}
+
+
+$MyWorkFolder   = (Join-Path $MyWorkBaseFolder $DatabaseServer$DatabaseInstance-$DatabaseName)
+
+if (!($DatabaseInstance -eq '')) { $DatabaseServer = (Join-Path $DatabaseServer $DatabaseInstance) }
+if ($DatabaseName.StartsWith("4psnl")) { $DatabaseName = $DatabaseName.ToUpper();$MyWorkFolder = (Join-Path $MyWorkBaseFolder _$DatabaseName) }
+if ($DatabaseName.StartsWith("4psw1")) { $DatabaseName = $DatabaseName.ToUpper();$MyWorkFolder = (Join-Path $MyWorkBaseFolder _$DatabaseName) }
+if ($DatabaseName.StartsWith("Demo")) { $MyWorkFolder = (Join-Path $MyWorkBaseFolder _$DatabaseName) }
+
+
+
+
+
+
+
 $PowerShellPath = 'C:\WINDOWS\system32\WindowsPowerShell\v1.0\'
 $NavClientFolder = 'C:\Program Files (x86)\Microsoft Dynamics NAV\71\RoleTailored Client'
 $NavIde = (Join-Path $NavClientFolder '\finsql.exe')
@@ -55,32 +104,13 @@ C:\utils\split.exe $MyAllObjectsFile
 
 #DevApp
 #Split all NAV objects into individual files
-if (!(test-path $DevAppFolder)) {  New-Item -path $DevAppFolder -ItemType directory}
+#if (!(test-path $DevAppFolder)) {  New-Item -path $DevAppFolder -ItemType directory}
 #Create-FolderIfNotExists $DevAppFolder
 #Split-NAVApplicationObjectFile -Source $MyAllObjectsFile -Destination $DevAppFolder -PassThru -Force -PreserveFormatting
 #Remove-NAVApplicationObjectLanguage -Source $DevAppFolder -Destination $DevAppFolder -Force
 #Remove app properties
 #Set-NAVApplicationObjectProperty -Target $DevAppFolder -ModifiedProperty No -DateTimeProperty '' -PassThru # -VersionListProperty '' 
 
-if (!(test-path $DevAppsFolder)) {  New-Item -path $DevAppsFolder -ItemType directory}
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Codeunit.txt -Source $DevAppFolder\COD*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\MenuSuite.txt -Source $DevAppFolder\MEN*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Page.txt -Source $DevAppFolder\PAG*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Query.txt -Source $DevAppFolder\QUE*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Tables.txt -Source $DevAppFolder\TAB*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\XMLPorts.txt -Source $DevAppFolder\XML*.TXT  -Force
-
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports1101.txt -Source $DevAppFolder\REP1101*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports11XX.txt -Source $DevAppFolder\REP11[2-9][2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports1X.txt -Source $DevAppFolder\REP1[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports2X.txt -Source $DevAppFolder\REP2[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports3X.txt -Source $DevAppFolder\REP3[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports4X.txt -Source $DevAppFolder\REP4[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports5X.txt -Source $DevAppFolder\REP5[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports6X.txt -Source $DevAppFolder\REP6[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports7X.txt -Source $DevAppFolder\REP7[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports8X.txt -Source $DevAppFolder\REP8[2-9]*.TXT  -Force
-Join-NAVApplicationObjectFile -Destination $DevAppsFolder\Reports9X.txt -Source $DevAppFolder\REP9[2-9]*.TXT  -Force
 #Languages
 #if (!(test-path $LanguageFolder)) {  New-Item -path $LanguageFolder -ItemType directory}
 #Create-FolderIfNotExists $LanguageFolder
